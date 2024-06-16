@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:sweebuzz/HomeScreen/home_screen.dart';
 
-void main() {
+import 'package:flutter_displaymode/flutter_displaymode.dart';
+
+Future<void> main() async {
   runApp(const MyApp());
+  await FlutterDisplayMode.setHighRefreshRate();
 }
 
 class MyApp extends StatelessWidget {
