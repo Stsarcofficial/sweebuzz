@@ -1,15 +1,8 @@
 import 'package:flutter/material.dart';
 import '../AddScreen/add_page.dart';
 import '../SearchScreen/search_screen.dart';
-
 import '../ProfileScreen/profile_screen.dart';
 import '../VlogScreen/vlog_screen.dart';
-
-void main() {
-  runApp(const MaterialApp(
-    home: HomeScreen(),
-  ));
-}
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -21,6 +14,11 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   int currentIndex = 0;
 
+  // Define icon properties
+  final Color selectedColor = Color.fromARGB(255, 235, 118, 64); // Orange color for selected icon
+  final Color unselectedColor = Colors.grey; // Grey color for unselected icons
+  final double iconSize = 35.0; // Icon size
+
   final List<Widget> pages = [
     const HomeContent(),
     const SearchPage(),
@@ -28,12 +26,6 @@ class _HomeScreenState extends State<HomeScreen> {
     const VlogPage(),
     const ProfilePage(),
   ];
-
-  void onTabTapped(int index) {
-    setState(() {
-      currentIndex = index;
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -70,34 +62,42 @@ class _HomeScreenState extends State<HomeScreen> {
         index: currentIndex,
         children: pages,
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: currentIndex,
-        onTap: onTabTapped,
-        selectedItemColor: Color.fromARGB(255, 235, 118, 64),
-        unselectedItemColor: Colors.grey,
-        items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Home',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.search),
-            label: 'Search',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.add),
-            label: 'Add',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.video_library),
-            label: 'Vlog',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person),
-            label: 'Profile',
-          ),
-        ],
+      bottomNavigationBar: BottomAppBar(
+      elevation: 0, // No shadow
+      color: Colors.white, // Background color
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 10.0), 
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            buildBottomNavItem(Icons.home, 0),
+            SizedBox(width: 20.0), // Adjust the width between icons
+            buildBottomNavItem(Icons.search, 1),
+            SizedBox(width: 20.0), 
+            buildBottomNavItem(Icons.add, 2),
+            SizedBox(width: 20.0), 
+            buildBottomNavItem(Icons.video_library, 3),
+            SizedBox(width: 20.0), 
+            buildBottomNavItem(Icons.person, 4),
+      ],
+    ),
+  ),
+),
+    );
+  }
+
+  Widget buildBottomNavItem(IconData icon, int index) {
+    return IconButton(
+      icon: Icon(
+        icon,
+        size: iconSize,
+        color: currentIndex == index ? selectedColor : unselectedColor,
       ),
+      onPressed: () {
+        setState(() {
+          currentIndex = index;
+        });
+      },
     );
   }
 }
@@ -176,7 +176,7 @@ class CategoryButtons extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(left: 20),
+      padding: const EdgeInsets.only(left: 20, bottom: 10, top: 5),
       child: Row(
         children: [
           ElevatedButton(
