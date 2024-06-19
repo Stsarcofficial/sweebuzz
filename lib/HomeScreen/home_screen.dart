@@ -6,6 +6,7 @@ import '../AddScreen/add_page.dart';
 import '../SearchScreen/search_screen.dart';
 import '../ProfileScreen/profile_screen.dart';
 import '../VlogScreen/vlog_screen.dart';
+import 'package:sweebuzz/chatscreen/chats.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -261,7 +262,9 @@ class _HomeContentState extends State<HomeContent> {
               width: 20,
             ),
             InkWell(
-              onTap: () {},
+              onTap: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) => const Chatscreen()));
+              },
               child: SvgPicture.asset(
                 "assets/images/img_message2.svg",
                 height: 25,
