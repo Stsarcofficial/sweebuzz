@@ -1,16 +1,38 @@
 import 'package:flutter/material.dart';
 import 'package:sweebuzz/HomeScreen/home_screen.dart';
-
+import 'package:sweebuzz/LoginScreen/login_screen.dart';
+import 'package:sweebuzz/LoginScreen/signup_screen.dart';
+import 'package:sweebuzz/LoginScreen/create_acc_acreen.dart';
 import 'package:flutter_displaymode/flutter_displaymode.dart';
+import 'package:sweebuzz/NotificationScreen/Notification_Allpage.dart';
 
-Future<void> main() async {
-  runApp(const MyApp());
-  await FlutterDisplayMode.setHighRefreshRate();
+// Future<void> main() async {
+//   runApp(const MyApp());
+//   await FlutterDisplayMode.setHighRefreshRate();
+// }
+
+// class MyApp extends StatelessWidget {
+//   const MyApp({super.key});
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return MaterialApp(
+//       title: 'Flutter Demo',
+//       theme: ThemeData(
+//         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+//         useMaterial3: true,
+//       ),
+//       home: const HomeScreen(),  // Set the new home screen here
+//       debugShowCheckedModeBanner: false,
+//     );
+//   }
+// }
+
+void main() {
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -26,8 +48,22 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const HomeScreen(), // Set the new home screen here
+      home: const LoginPage(), // Set the new home screen here
       debugShowCheckedModeBanner: false,
     );
   }
 }
+   
+// void main() {
+//   runApp(MyApp());
+// }
+
+// class MyApp extends StatelessWidget {
+//   @override
+//   Widget build(BuildContext context) {
+//     return MaterialApp(
+//       home: NotificationsPage(),
+//     );
+//   }
+// }
+
