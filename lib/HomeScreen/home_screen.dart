@@ -17,23 +17,26 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   int currentIndex = 0;
-
+  bool video = false;
   // Define icon properties
   final Color selectedColor =
       const Color.fromARGB(255, 235, 118, 64); // Orange color for selected icon
   final Color unselectedColor = Colors.grey; // Grey color for unselected icons
   final double iconSize = 35.0; // Icon size
 
-  final List<Widget> pages = [
-    const HomeContent(),
-    const SearchPage(),
-    const AddPage(),
-    const VlogPage(),
-    const ProfilePage(),
-  ];
+  late List<Widget> pages;
 
   @override
   Widget build(BuildContext context) {
+    pages = [
+      const HomeContent(),
+      const SearchPage(),
+      const AddPage(),
+      VlogPage(
+        video: video,
+      ),
+      const ProfilePage(),
+    ];
     return Scaffold(
       body: IndexedStack(
         index: currentIndex,
@@ -71,6 +74,15 @@ class _HomeScreenState extends State<HomeScreen> {
         color: currentIndex == index ? selectedColor : unselectedColor,
       ),
       onPressed: () {
+        if (index == 3) {
+          setState(() {
+            video = true;
+          });
+        } else {
+          setState(() {
+            video = false;
+          });
+        }
         if (index != 2) {
           setState(() {
             currentIndex = index;
@@ -80,143 +92,199 @@ class _HomeScreenState extends State<HomeScreen> {
               backgroundColor: Colors.transparent,
               context: context,
               builder: (BuildContext context) {
-                return Container(
-                  width: double.infinity,
-                  height: 270,
-                  decoration: BoxDecoration(
-                    gradient: RadialGradient(
-                      radius: 0.9,
-                      colors: [
-                        const Color.fromARGB(255, 235, 118, 64)
-                            .withOpacity(0.9),
-                        const Color.fromARGB(255, 255, 255, 255)
-                            .withOpacity(0.4)
-                      ],
-                      stops: const [0.2, 1.0],
-                    ),
-                  ),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    mainAxisSize: MainAxisSize.min,
-                    children: <Widget>[
-                      Badge(
-                        backgroundColor:
-                            const Color.fromARGB(255, 235, 118, 64),
-                        offset: const Offset(4, 10),
-                        label: const Icon(
-                          Icons.add,
-                          size: 15,
-                          color: Colors.white,
-                        ),
-                        largeSize: 25,
-                        alignment: Alignment.bottomCenter,
-                        child: ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(19)),
-                              alignment: Alignment.topCenter,
-                              foregroundColor:
-                                  Color.fromARGB(255, 235, 118, 64),
-                              backgroundColor: Colors.white,
-                              padding: const EdgeInsets.only(
-                                  bottom: 13, top: 6, left: 17, right: 17),
-                              minimumSize: const Size(0, 0),
-                            ),
-                            child: const Text(
-                              "Story",
-                              style: TextStyle(fontSize: 16),
-                            ),
-                            onPressed: () {}),
-                      ),
-                      SizedBox(
-                        height: 30,
-                      ),
-                      const Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
+                return SizedBox(
+                    height: 280,
+                    child: Column(
+                        mainAxisAlignment: MainAxisAlignment.end,
                         children: [
-                          Icon(
-                            Icons.image,
-                            color: Colors.white,
-                            size: 30,
+                          Container(
+                            height: 7,
+                            width: 120,
+                            color: Color(0xFFE66137),
                           ),
-                          SizedBox(
-                            width: 10,
-                          ),
-                          Text(
-                            "Post",
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 20,
-                                fontFamily: "poppins",
-                                fontWeight: FontWeight.w600),
-                          ),
-                          SizedBox(
-                            width: 70,
-                          ),
-                          Icon(
-                            Icons.app_blocking_sharp,
-                            color: Colors.white,
-                            size: 30,
-                          ),
-                          SizedBox(
-                            width: 10,
-                          ),
-                          Text(
-                            "Blog",
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 20,
-                                fontFamily: "poppins",
-                                fontWeight: FontWeight.w600),
-                          ),
-                        ],
-                      ),
-                      SizedBox(
-                        height: 30,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Icon(
-                            Icons.image,
-                            color: Colors.white,
-                            size: 30,
-                          ),
-                          SizedBox(
-                            width: 10,
-                          ),
-                          Text(
-                            "Vlog",
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 20,
-                                fontFamily: "poppins",
-                                fontWeight: FontWeight.w600),
-                          ),
-                          SizedBox(
-                            width: 70,
-                          ),
-                          Icon(
-                            Icons.app_blocking_sharp,
-                            color: Colors.white,
-                            size: 30,
-                          ),
-                          SizedBox(
-                            width: 10,
-                          ),
-                          Text(
-                            "Vibe",
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 20,
-                                fontFamily: "poppins",
-                                fontWeight: FontWeight.w600),
-                          ),
-                        ],
-                      )
-                    ],
-                  ),
-                );
+                          Container(
+                            width: double.infinity,
+                            height: 270,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(16),
+                              gradient: RadialGradient(
+                                radius: 0.9,
+                                colors: [
+                                  const Color(0xFFE66137).withOpacity(0.7),
+                                  const Color.fromARGB(255, 255, 255, 255)
+                                      .withOpacity(0.5)
+                                ],
+                                stops: const [0, 9],
+                              ),
+                            ),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              mainAxisSize: MainAxisSize.min,
+                              children: <Widget>[
+                                Badge(
+                                  backgroundColor: const Color(0xFFE66137),
+                                  offset: const Offset(4, 10),
+                                  label: const Icon(
+                                    Icons.add,
+                                    size: 15,
+                                    color: Colors.white,
+                                  ),
+                                  largeSize: 25,
+                                  alignment: Alignment.bottomCenter,
+                                  child: ElevatedButton(
+                                      style: ElevatedButton.styleFrom(
+                                        shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(14)),
+                                        alignment: Alignment.topCenter,
+                                        foregroundColor:
+                                            const Color(0xFFE66137),
+                                        backgroundColor: Colors.white,
+                                        padding: const EdgeInsets.only(
+                                            bottom: 10, left: 17, right: 17),
+                                        minimumSize: const Size(0, 0),
+                                      ),
+                                      child: const Text(
+                                        "Story",
+                                        style: TextStyle(
+                                            fontSize: 18,
+                                            fontFamily: "Palanquin",
+                                            fontWeight: FontWeight.w500),
+                                      ),
+                                      onPressed: () {}),
+                                ),
+                                const SizedBox(
+                                  height: 30,
+                                ),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    SvgPicture.asset(
+                                      "assets/images/img_user_primarycontainer.svg",
+                                      height: 27,
+                                      width: 27,
+                                    ),
+                                    const SizedBox(
+                                      width: 10,
+                                    ),
+                                    const Text(
+                                      "Post",
+                                      style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 20,
+                                          fontFamily: "poppins",
+                                          fontWeight: FontWeight.w600),
+                                    ),
+                                    const SizedBox(
+                                      width: 80,
+                                    ),
+                                    Container(
+                                        height: 27,
+                                        width: 27,
+                                        alignment: Alignment.topCenter,
+                                        decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(3),
+                                          color: Colors.white,
+                                        ),
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 4, vertical: 0),
+                                        child: const Text(
+                                          "B",
+                                          style: TextStyle(
+                                              fontFamily: "pottaoneregular",
+                                              color: Color(0xFFE66137),
+                                              fontSize: 20),
+                                        )),
+                                    const SizedBox(
+                                      width: 10,
+                                    ),
+                                    const Text(
+                                      "Blog",
+                                      style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 20,
+                                          fontFamily: "poppins",
+                                          fontWeight: FontWeight.w600),
+                                    ),
+                                  ],
+                                ),
+                                const SizedBox(
+                                  height: 30,
+                                ),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Container(
+                                        height: 27,
+                                        width: 27,
+                                        alignment: Alignment.topCenter,
+                                        decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(3),
+                                          color: Colors.white,
+                                        ),
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 4, vertical: 0),
+                                        child: const Text(
+                                          "V",
+                                          style: TextStyle(
+                                              fontFamily: "pottaoneregular",
+                                              color: const Color(0xFFE66137),
+                                              fontSize: 20),
+                                        )),
+                                    const SizedBox(
+                                      width: 10,
+                                    ),
+                                    const Text(
+                                      "Vlog",
+                                      style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 20,
+                                          fontFamily: "poppins",
+                                          fontWeight: FontWeight.w600),
+                                    ),
+                                    const SizedBox(
+                                      width: 60,
+                                    ),
+                                    Padding(
+                                      padding:
+                                          const EdgeInsets.only(left: 18.0),
+                                      child: Container(
+                                        height: 27,
+                                        width: 27,
+                                        decoration: BoxDecoration(
+                                            color: Colors.white,
+                                            borderRadius:
+                                                BorderRadius.circular(3)),
+                                        padding: const EdgeInsets.symmetric(
+                                          horizontal: 5,
+                                          vertical: 7,
+                                        ),
+                                        child: SvgPicture.asset(
+                                          "assets/images/img_videocamera.svg",
+                                          height: 13,
+                                          width: 13,
+                                        ),
+                                      ),
+                                    ),
+                                    const SizedBox(
+                                      width: 10,
+                                    ),
+                                    const Text(
+                                      "Vibe",
+                                      style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 20,
+                                          fontFamily: "poppins",
+                                          fontWeight: FontWeight.w600),
+                                    ),
+                                  ],
+                                )
+                              ],
+                            ),
+                          )
+                        ]));
               });
         }
       },
@@ -263,7 +331,10 @@ class _HomeContentState extends State<HomeContent> {
             ),
             InkWell(
               onTap: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) => const Chatscreen()));
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const Chatscreen()));
               },
               child: SvgPicture.asset(
                 "assets/images/img_message2.svg",
