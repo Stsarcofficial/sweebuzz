@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sweebuzz/HomeScreen/home_screen.dart';
 
 void main() {
   runApp(const CreateAccountPage());
@@ -26,7 +27,8 @@ class CreateAccountPage extends StatelessWidget {
                 child: Container(
                   padding: const EdgeInsets.symmetric(horizontal: 30),
                   width: double.infinity,
-                  color: const Color(0xFFededed), // Background color set to #ededed
+                  color: const Color(
+                      0xFFededed), // Background color set to #ededed
                   child: Form(
                     key: _formKey,
                     child: Column(
@@ -65,7 +67,8 @@ class CreateAccountPage extends StatelessWidget {
     );
   }
 
-  Widget inputFieldsSection(TextEditingController mobileController, BuildContext context) {
+  Widget inputFieldsSection(
+      TextEditingController mobileController, BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
@@ -95,7 +98,8 @@ class CreateAccountPage extends StatelessWidget {
     );
   }
 
-  Widget inputField({required String label, required String hintText, Widget? widget}) {
+  Widget inputField(
+      {required String label, required String hintText, Widget? widget}) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
@@ -113,7 +117,8 @@ class CreateAccountPage extends StatelessWidget {
             if (widget != null) widget,
           ],
         ),
-        const SizedBox(height: 5), // Set the gap between text and input field to 5
+        const SizedBox(
+            height: 5), // Set the gap between text and input field to 5
         TextField(
           decoration: InputDecoration(
             hintText: hintText,
@@ -134,18 +139,18 @@ class CreateAccountPage extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: 10), // Adjusted padding
       child: ElevatedButton(
         onPressed: () {
-          if (formKey.currentState!.validate()) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(content: Text('Processing Data')),
+          Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => HomeScreen()),
             );
-          }
         },
         style: ElevatedButton.styleFrom(
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(12),
           ),
           padding: const EdgeInsets.symmetric(
-              vertical: 10, horizontal: 10), // Adjusted horizontal and vertical padding
+              vertical: 10,
+              horizontal: 10), // Adjusted horizontal and vertical padding
           backgroundColor: const Color.fromRGBO(251, 109, 72, 1.000),
           elevation: 0, // Remove button elevation
         ),

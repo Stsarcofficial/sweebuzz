@@ -22,7 +22,7 @@ class _HomeScreenState extends State<HomeScreen> {
   final Color selectedColor =
       const Color.fromARGB(255, 235, 118, 64); // Orange color for selected icon
   final Color unselectedColor = Colors.grey; // Grey color for unselected icons
-  final double iconSize = 35.0; // Icon size
+  final double iconSize = 30.0; // Icon size
 
   late List<Widget> pages;
 
@@ -44,9 +44,10 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       bottomNavigationBar: BottomAppBar(
         elevation: 0, // No shadow
+        height: 65,
         color: Colors.white, // Background color
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 10.0),
+          padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 0),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [

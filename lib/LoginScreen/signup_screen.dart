@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:sweebuzz/LoginScreen/login_screen.dart';
-import 'signup_screen.dart';
+import 'login_screen.dart';
+import 'create_acc_acreen.dart';
 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({super.key});
@@ -16,38 +16,47 @@ class _SignUpPageState extends State<SignUpPage> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-        backgroundColor: Colors.white,
+        backgroundColor: const Color(0xFFededed),
         body: SingleChildScrollView(
           child: Container(
-            margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 50),
+            margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 90),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 const Text(
                   "Sign Up",
                   textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                  style: TextStyle(fontSize: 28, fontWeight: FontWeight.w900),
                 ),
-                const SizedBox(height: 30),
+                const SizedBox(height: 70),
                 _inputField("Name", "Enter Name", TextInputType.text),
                 const SizedBox(height: 15),
                 _inputField("Username", "Enter Username", TextInputType.text),
                 const SizedBox(height: 15),
-                _inputField("Mobile Number", "Enter Mobile Number", TextInputType.phone),
+                _inputField("Mobile Number", "Enter Mobile Number",
+                    TextInputType.phone),
                 const SizedBox(height: 30),
                 ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => CreateAccountPage()),
+                    );
+                  },
                   style: ElevatedButton.styleFrom(
                     elevation: 0,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10),
                     ),
-                    padding: const EdgeInsets.symmetric(vertical: 14),
+                    padding: const EdgeInsets.symmetric(vertical: 12),
                     backgroundColor: const Color.fromRGBO(251, 109, 72, 1.000),
                   ),
                   child: const Text(
                     "Next",
-                    style: TextStyle(fontSize: 18, color: Colors.white, fontWeight: FontWeight.w900),
+                    style: TextStyle(
+                        fontSize: 18,
+                        color: Colors.white,
+                        fontWeight: FontWeight.w900),
                   ),
                 ),
                 const SizedBox(height: 20),
@@ -58,32 +67,34 @@ class _SignUpPageState extends State<SignUpPage> {
                       padding: EdgeInsets.symmetric(horizontal: 10),
                       child: Text(
                         "Or Sign Up with",
-                        style: TextStyle(color: Color.fromARGB(255, 116, 116, 116)),
+                        style: TextStyle(
+                            color: Color.fromARGB(255, 116, 116, 116)),
                       ),
                     ),
                     Expanded(child: Divider(thickness: 1)),
                   ],
                 ),
                 const SizedBox(height: 20),
-                SizedBox(
-                  width: 40,
-                  height: 30, // Set the width and height of the button to match the image
+                Center(
                   child: ElevatedButton.icon(
                     onPressed: () {
                       // Add Google sign-up logic here
                     },
                     style: ElevatedButton.styleFrom(
                       elevation: 0,
-                      backgroundColor: const Color.fromRGBO(251, 109, 72, 1.000),
+                      backgroundColor:
+                          const Color.fromRGBO(251, 109, 72, 1.000),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(12),
                       ),
-                      padding: const EdgeInsets.symmetric(horizontal: 10),
+                      fixedSize:
+                          const Size(110, 30), // Adjust the size as required
                     ),
-                    icon: const Icon(Icons.g_mobiledata_outlined, size: 14, color: Color(0xFFF2F2F2)),
+                    icon: const Icon(Icons.g_mobiledata_outlined,
+                        color: Color(0xFFF2F2F2), size: 20),
                     label: const Text(
                       "Google",
-                      style: TextStyle(color: Color(0xFFF2F2F2), fontSize: 12),
+                      style: TextStyle(color: Color(0xFFF2F2F2), fontSize: 16),
                     ),
                   ),
                 ),
@@ -91,17 +102,22 @@ class _SignUpPageState extends State<SignUpPage> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Text("Already have an account ?", style: TextStyle(color: Colors.grey)),
+                    const Text("Already have an account ?",
+                        style: TextStyle(color: Colors.grey)),
                     TextButton(
                       onPressed: () {
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => LoginPage()),
+                          MaterialPageRoute(
+                              builder: (context) => const LoginPage()),
                         );
                       },
                       child: const Text(
                         "Login",
-                        style: TextStyle(color: Color.fromRGBO(251, 109, 72, 1.000)),
+                        style: TextStyle(
+                            color: Color.fromRGBO(72, 72, 72, 1),
+                            fontSize: 15,
+                            fontWeight: FontWeight.bold),
                       ),
                     ),
                   ],
@@ -120,14 +136,18 @@ class _SignUpPageState extends State<SignUpPage> {
       children: [
         Text(
           label,
-          style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Color.fromRGBO(251, 109, 72, 1.000)),
+          style: const TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
+              color: Color.fromRGBO(251, 109, 72, 1.000)),
         ),
         const SizedBox(height: 5),
         TextField(
           decoration: InputDecoration(
             contentPadding: const EdgeInsets.all(12),
             hintText: hint,
-            hintStyle: const TextStyle(color: Color.fromARGB(255, 164, 163, 163)),
+            hintStyle:
+                const TextStyle(color: Color.fromARGB(255, 164, 163, 163)),
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(12),
               borderSide: BorderSide.none,
@@ -146,8 +166,4 @@ class _SignUpPageState extends State<SignUpPage> {
       ],
     );
   }
-}
-
-void main() {
-  runApp(const SignUpPage());
 }
