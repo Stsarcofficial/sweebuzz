@@ -102,7 +102,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           Container(
                             height: 7,
                             width: 120,
-                            color: Color(0xFFE66137),
+                            color: const Color(0xFFE66137),
                           ),
                           Container(
                             width: double.infinity,
@@ -307,7 +307,7 @@ class _HomeContentState extends State<HomeContent> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 255, 255, 255),
+      backgroundColor: Color.fromARGB(255, 247, 247, 247),
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         title: Row(
@@ -355,7 +355,7 @@ class _HomeContentState extends State<HomeContent> {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const TopStories(),
+          TopStories(),
           CategoryButtons(
             currentIndex: currentIndex,
             onCategoryChanged: (index) {
@@ -374,28 +374,81 @@ class _HomeContentState extends State<HomeContent> {
 }
 
 class TopStories extends StatelessWidget {
-  const TopStories({super.key});
+  final List<String> stories = [
+    "assets/images/img_rectangle148.png",
+    "assets/images/img_rectangle148.png",
+    "assets/images/img_rectangle148.png",
+    "assets/images/img_rectangle148.png",
+    "assets/images/img_rectangle148.png"
+  ];
+  TopStories({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.all(10),
-      height: 100,
+      margin: const EdgeInsets.all(8),
+      height: 120,
       child: ListView(
         scrollDirection: Axis.horizontal,
-        children: List.generate(10, (index) {
-          return Container(
-            margin: const EdgeInsets.symmetric(horizontal: 5),
-            width: 70,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(15),
-              border: Border.all(color: Colors.grey),
-              image: const DecorationImage(
-                image: AssetImage('assets/images/img_rectangle148.png'),
-                fit: BoxFit.cover,
-              ),
-            ),
-          );
+        children: List.generate(5, (index) {
+          return index != 0
+              ? Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Container(
+                      margin: const EdgeInsets.symmetric(horizontal: 5),
+                      width: 70,
+                      height: 110,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(15),
+                        border: Border.all(
+                            color: const Color.fromARGB(255, 235, 118, 64),
+                            width: 1.5),
+                        image: DecorationImage(
+                          colorFilter: ColorFilter.mode(
+                              Colors.black.withOpacity(0.1), BlendMode.darken),
+                          image: AssetImage(stories[index]),
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                    ),
+                  ],
+                )
+              : Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Badge(
+                      backgroundColor: const Color.fromARGB(255, 255, 255, 255),
+                      offset: const Offset(0, 10),
+                      label: const Icon(
+                        Icons.add,
+                        size: 15,
+                        weight: 10,
+                        color: Color.fromARGB(255, 0, 0, 0),
+                      ),
+                      largeSize: 25,
+                      alignment: Alignment.bottomCenter,
+                      child: Container(
+                        height: 110,
+                        margin: const EdgeInsets.symmetric(horizontal: 5),
+                        width: 70,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(15),
+                          border: Border.all(color: Colors.grey),
+                          image: DecorationImage(
+                            colorFilter: ColorFilter.mode(
+                                Colors.black.withOpacity(0.1),
+                                BlendMode.darken),
+                            image: AssetImage(stories[index]),
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                );
         }),
       ),
     );
@@ -436,7 +489,7 @@ class CategoryButtons extends StatelessWidget {
             child: const Text(
               'Posts',
               style: TextStyle(
-                  fontSize: 17,
+                  fontSize: 16,
                   fontFamily: 'outfit',
                   fontWeight: FontWeight.w500),
             ),
@@ -459,7 +512,7 @@ class CategoryButtons extends StatelessWidget {
             onPressed: () => onCategoryChanged(1),
             child: const Text('Vlogs',
                 style: TextStyle(
-                    fontSize: 17,
+                    fontSize: 16,
                     fontFamily: 'outfit',
                     fontWeight: FontWeight.w500)),
           ),
@@ -482,7 +535,7 @@ class CategoryButtons extends StatelessWidget {
             child: const Text(
               'Blogs',
               style: TextStyle(
-                  fontSize: 17,
+                  fontSize: 16,
                   fontFamily: 'outfit',
                   fontWeight: FontWeight.w500),
             ),
@@ -527,15 +580,55 @@ class ContentList extends StatelessWidget {
 class PostCard extends StatelessWidget {
   final int index;
 
-  const PostCard({required this.index, super.key});
-
+  PostCard({required this.index, super.key});
+  final List<Map<String, String>> Imagedata = [
+    {
+      'pfp': 'assets/images/img_rectangle60.png',
+      'url': 'assets/images/img_group1531.png',
+    },
+    {
+      'pfp': 'assets/images/img_rectangle60.png',
+      'url': 'assets/images/img_group1531.png',
+    },
+    {
+      'pfp': 'assets/images/img_rectangle60.png',
+      'url': 'assets/images/img_group1531.png',
+    },
+    {
+      'pfp': 'assets/images/img_rectangle60.png',
+      'url': 'assets/images/img_group1531.png',
+    },
+    {
+      'pfp': 'assets/images/img_rectangle60.png',
+      'url': 'assets/images/img_group1531.png',
+    },
+    {
+      'pfp': 'assets/images/img_rectangle60.png',
+      'url': 'assets/images/img_group1531.png',
+    },
+    {
+      'pfp': 'assets/images/img_rectangle60.png',
+      'url': 'assets/images/img_group1531.png',
+    },
+    {
+      'pfp': 'assets/images/img_rectangle60.png',
+      'url': 'assets/images/img_group1531.png',
+    },
+    {
+      'pfp': 'assets/images/img_rectangle60.png',
+      'url': 'assets/images/img_group1531.png',
+    },
+    {
+      'pfp': 'assets/images/img_rectangle60.png',
+      'url': 'assets/images/img_group1531.png',
+    },
+  ];
   @override
   Widget build(BuildContext context) {
     return Card(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(25),
       ),
-      elevation: 10,
       color: Colors.white,
       margin: const EdgeInsets.all(10),
       child: Padding(
@@ -546,7 +639,7 @@ class PostCard extends StatelessWidget {
             ListTile(
               contentPadding: const EdgeInsets.all(0),
               leading: Image.asset(
-                "assets/images/img_rectangle60.png",
+                Imagedata[index]["pfp"]!,
                 height: 40,
                 width: 40,
               ),
@@ -556,19 +649,24 @@ class PostCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  const Text(
-                    "Virat Kohli",
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold, fontFamily: "poppins"),
+                  Text(
+                    "virat kohli",
+                    style: const TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.bold,
+                        fontFamily: "poppins"),
                   ),
                   const SizedBox(
                     width: 50,
                   ),
-                  const Text("5 min ago",
-                      style: TextStyle(
-                          fontSize: 12,
-                          fontFamily: 'outfit',
-                          fontWeight: FontWeight.w300)),
+                  const Padding(
+                    padding: EdgeInsets.only(right: 4.0),
+                    child: Text("5 min ago",
+                        style: TextStyle(
+                            fontSize: 12,
+                            fontFamily: 'outfit',
+                            fontWeight: FontWeight.w300)),
+                  ),
                   SvgPicture.asset(
                     "assets/images/img_save11.svg",
                     color: const Color.fromARGB(255, 75, 75, 75),
@@ -581,7 +679,7 @@ class PostCard extends StatelessWidget {
               ),
               subtitle: const Text("India",
                   style: TextStyle(
-                      fontSize: 10,
+                      fontSize: 12,
                       fontFamily: 'outfit',
                       fontWeight: FontWeight.w300)),
             ),
@@ -590,17 +688,46 @@ class PostCard extends StatelessWidget {
               width: MediaQuery.of(context).size.width * 0.8,
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(13),
-                  image: const DecorationImage(
+                  image: DecorationImage(
                       fit: BoxFit.cover,
-                      image: AssetImage("assets/images/img_group1531.png"))),
+                      image: AssetImage(Imagedata[index]["url"]!))),
             ),
             const SizedBox(height: 10),
-            Text(
-              'Post Title ${index + 1}',
-              style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            const Text(
+              'OFF THE MARK ✅',
+              style: TextStyle(
+                  fontSize: 15,
+                  fontWeight: FontWeight.w200,
+                  fontFamily: "poppins"),
             ),
-            Text('Post Description ${index + 1}'),
-            const SizedBox(height: 10),
+            Row(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                const Text(
+                  '@royalchallangersbanglore ',
+                  style: TextStyle(
+                      fontSize: 13,
+                      fontWeight: FontWeight.w200,
+                      fontFamily: "poppins"),
+                ),
+                GestureDetector(
+                  onTap: () {},
+                  child: const Text(
+                    "read more...",
+                    style: TextStyle(
+                        color: Colors.blue,
+                        fontSize: 13,
+                        fontWeight: FontWeight.w200,
+                        fontFamily: "poppins"),
+                  ),
+                )
+              ],
+            ),
+            SizedBox(
+              height: 15,
+            ),
             Row(
               children: [
                 const Column(
@@ -612,8 +739,11 @@ class PostCard extends StatelessWidget {
                     ),
                     Text(
                       "10M",
-                      style:
-                          TextStyle(color: Color.fromARGB(255, 235, 118, 64)),
+                      style: TextStyle(
+                          fontSize: 10,
+                          fontWeight: FontWeight.w500,
+                          color: Color.fromARGB(255, 235, 118, 64),
+                          fontFamily: "poppins"),
                     )
                   ],
                 ),
@@ -627,7 +757,13 @@ class PostCard extends StatelessWidget {
                       height: 25,
                       width: 25,
                     ),
-                    const Text("200k")
+                    const Text(
+                      "200k",
+                      style: TextStyle(
+                          fontSize: 10,
+                          fontWeight: FontWeight.w500,
+                          fontFamily: "poppins"),
+                    )
                   ],
                 ),
                 const SizedBox(
@@ -639,7 +775,13 @@ class PostCard extends StatelessWidget {
                       Icons.share_outlined,
                       size: 26,
                     ),
-                    Text("14k")
+                    Text(
+                      "14k",
+                      style: TextStyle(
+                          fontSize: 10,
+                          fontWeight: FontWeight.w500,
+                          fontFamily: "poppins"),
+                    )
                   ],
                 ),
               ],

@@ -204,7 +204,7 @@ class _VlogPageState extends State<VlogPage> {
                         onTap: () {
                           setState(() {
                             if (_controller!.value.isPlaying) {
-                              _controller!.pause();
+                              _controller!.pause(); 
                             } else {
                               _controller!.play();
                             }
