@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sweebuzz/HomeScreen/home_screen.dart';
 
 void main() {
   runApp(const NotificationsPage());
@@ -20,7 +21,12 @@ class NotificationsPage extends StatelessWidget {
             elevation: 0,
             leading: IconButton(
               icon: Icon(Icons.arrow_back, color: Color.fromRGBO(251, 109, 72, 1.000)),
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => HomeScreen()),
+                );
+              },
             ),
             title: Text('Notifications', style: TextStyle(color: Color.fromRGBO(251, 109, 72, 1.000), fontWeight: FontWeight.bold)),
             bottom: PreferredSize(

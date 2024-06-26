@@ -72,7 +72,7 @@ class _LoginPageState extends State<LoginPage> {
           padding: EdgeInsets.only(bottom: 5),
           child: Text(
             "Mobile Number",
-            style: TextStyle(fontSize: 18, fontWeight: FontWeight.w900, color: Color.fromRGBO(251, 109, 72, 1.000)),
+            style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600, color: Color.fromRGBO(251, 106, 72, 1.000)),
           ),
         ),
         TextField(
@@ -98,7 +98,7 @@ class _LoginPageState extends State<LoginPage> {
           padding: EdgeInsets.only(bottom: 5),
           child: Text(
             "Password",
-            style: TextStyle(fontSize: 18, fontWeight: FontWeight.w900, color: Color.fromRGBO(251, 109, 72, 1.000)),
+            style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600, color: Color.fromRGBO(251, 109, 72, 1.000)),
           ),
         ),
         TextField(
@@ -158,7 +158,7 @@ class _LoginPageState extends State<LoginPage> {
           ),
           child: const Text(
             "Login",
-            style: TextStyle(fontSize: 18, color: Colors.white, fontWeight: FontWeight.w900),
+            style: TextStyle(fontSize: 18, color: Colors.white, fontWeight: FontWeight.w600),
           ),
         ),
       ],

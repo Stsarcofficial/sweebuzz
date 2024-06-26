@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:sweebuzz/NotificationScreen/Notification_Allpage.dart';
 import '../AddScreen/add_page.dart';
 import '../SearchScreen/search_screen.dart';
 import '../ProfileScreen/profile_screen.dart';
@@ -320,7 +321,12 @@ class _HomeContentState extends State<HomeContent> {
             ),
             const Spacer(),
             InkWell(
-              onTap: () {},
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => NotificationsPage()),
+                );
+              },
               child: SvgPicture.asset(
                 "assets/images/img_notification.svg",
                 height: 23,

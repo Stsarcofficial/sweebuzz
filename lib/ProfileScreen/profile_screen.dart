@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sweebuzz/HomeScreen/home_screen.dart';
+import 'package:sweebuzz/ProfileScreen/Editprofile_screen.dart';
+import 'package:sweebuzz/ProfileScreen/glimpse_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -71,7 +73,8 @@ class _ProfilePageState extends State<ProfilePage> {
         leading: IconButton(
           icon: const Icon(Icons.arrow_back, color: Colors.black),
           onPressed: () {
-            Navigator.push(context, MaterialPageRoute(builder: (context) => const HomeScreen()));
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => const HomeScreen()));
           },
         ),
         title: const Text(
@@ -88,7 +91,8 @@ class _ProfilePageState extends State<ProfilePage> {
                   value: 'settings',
                   child: Row(
                     children: const [
-                      Icon(Icons.settings, color: Color.fromARGB(255, 226, 115, 64)),
+                      Icon(Icons.settings,
+                          color: Color.fromARGB(255, 226, 115, 64)),
                       SizedBox(width: 10),
                       Text("Settings"),
                     ],
@@ -98,7 +102,8 @@ class _ProfilePageState extends State<ProfilePage> {
                   value: 'share_profile',
                   child: Row(
                     children: const [
-                      Icon(Icons.share, color: Color.fromARGB(255, 226, 115, 64)),
+                      Icon(Icons.share_outlined,
+                          color: Color.fromARGB(255, 226, 115, 64)),
                       SizedBox(width: 10),
                       Text("Share profile"),
                     ],
@@ -108,7 +113,8 @@ class _ProfilePageState extends State<ProfilePage> {
                   value: 'saved',
                   child: Row(
                     children: const [
-                      Icon(Icons.bookmark, color: Color.fromARGB(255, 226, 115, 64)),
+                      Icon(Icons.bookmark,
+                          color: Color.fromARGB(255, 226, 115, 64)),
                       SizedBox(width: 10),
                       Text("Saved"),
                     ],
@@ -118,7 +124,8 @@ class _ProfilePageState extends State<ProfilePage> {
                   value: 'logout',
                   child: Row(
                     children: const [
-                      Icon(Icons.logout, color: Color.fromARGB(255, 226, 115, 64)),
+                      Icon(Icons.logout,
+                          color: Color.fromARGB(255, 226, 115, 64)),
                       SizedBox(width: 10),
                       Text("Logout"),
                     ],
@@ -151,8 +158,8 @@ class _ProfilePageState extends State<ProfilePage> {
           height: 80,
           decoration: BoxDecoration(
             shape: BoxShape.rectangle,
-            borderRadius: BorderRadius.circular(12),
-            image: const DecorationImage(
+            borderRadius: BorderRadius.circular(8),
+            image: DecorationImage(
               image: AssetImage('assets/images/img_rectangle130_121x121.png'),
               fit: BoxFit.cover,
             ),
@@ -168,16 +175,22 @@ class _ProfilePageState extends State<ProfilePage> {
           child: Text(
             "Keep your face always toward the sunshine, and shadows will fall behind you.",
             textAlign: TextAlign.center,
-            style: TextStyle(color: Colors.grey),
+            style: TextStyle(color: Colors.grey, fontWeight: FontWeight.normal),
           ),
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             ElevatedButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => EditProfilePage()),
+                );
+              },
               style: ElevatedButton.styleFrom(
-                backgroundColor: const Color(0xFFf3d8d0), // Light background color
+                backgroundColor:
+                    const Color(0xFFf3d8d0), // Light background color
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(4),
                 ),
@@ -185,14 +198,22 @@ class _ProfilePageState extends State<ProfilePage> {
               ),
               child: const Text(
                 "Edit Profile",
-                style: TextStyle(color: Color.fromARGB(255, 226, 115, 64)), // Orange text color
+                style: TextStyle(
+                    color:
+                        Color.fromARGB(255, 226, 115, 64)), // Orange text color
               ),
             ),
             const SizedBox(width: 10),
             ElevatedButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => EditGlimpsePage()),
+                );
+              },
               style: ElevatedButton.styleFrom(
-                backgroundColor: const Color(0xFFf3d8d0), // Orange background color
+                backgroundColor:
+                    const Color(0xFFf3d8d0), // Orange background color
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(4),
                 ),
@@ -200,7 +221,9 @@ class _ProfilePageState extends State<ProfilePage> {
               ),
               child: const Text(
                 "Edit Glimpse",
-                style: TextStyle(color: Color.fromARGB(255, 226, 115, 64)), // Orange text color
+                style: TextStyle(
+                    color:
+                        Color.fromARGB(255, 226, 115, 64)), // Orange text color
               ),
             ),
           ],
@@ -233,7 +256,8 @@ class _ProfilePageState extends State<ProfilePage> {
         ),
         Text(
           label,
-          style: const TextStyle(color: Colors.grey, fontWeight: FontWeight.w100),
+          style:
+              const TextStyle(color: Colors.grey, fontWeight: FontWeight.w100),
         ),
       ],
     );
@@ -275,54 +299,447 @@ class _ProfilePageState extends State<ProfilePage> {
   Widget _profileContent() {
     switch (_selectedTabIndex) {
       case 0:
-        return _blogsContent();
+        return const BlogsContent();
       case 1:
-        return _vlogsContent();
+        return const VlogsContent();
       case 2:
-        return _postsContent();
+        return const PostsContent();
       case 3:
-        return _vibesContent();
+        return VibesContent();
       default:
-        return _postsContent();
+        return const PostsContent();
     }
   }
+}
 
-  Widget _blogsContent() {
-    return const Center(child: Text("Blogs content goes here"));
+class BlogsContent extends StatelessWidget {
+  const BlogsContent({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final List<Map<String, String>> imageData = [
+      {
+        'url': 'assets/images/img_rectangle250_819x414.png',
+        'text': 'A traveler\'s Diary'
+      },
+      {'url': 'assets/images/img_rectangle169.png', 'text': 'Image 2'},
+      {'url': 'assets/images/img_rectangle168.png', 'text': 'Image 3'},
+      {'url': 'assets/images/img_27745327513096_5.png', 'text': 'Image 4'},
+      {'url': 'assets/images/img_rectangle180.png', 'text': 'Image 5'},
+      {'url': 'assets/images/img_rectangle180.png', 'text': 'Image 6'},
+      {'url': 'assets/images/img_rectangle180.png', 'text': 'Image 7'},
+      {'url': 'assets/images/img_rectangle180.png', 'text': 'Image 8'},
+    ];
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Padding(
+          padding: const EdgeInsets.only(left: 8, right: 12, top: 13),
+          child: GridView.count(
+            childAspectRatio: 1.3,
+            crossAxisCount: 2,
+            shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
+            children: List.generate(imageData.length, (index) {
+              return InkWell(
+                onTap: () {
+                  // Add your navigation logic here
+                  // For example, navigate to a detail page
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => BlogDetailPage(
+                        imageUrl: imageData[index]['url']!,
+                        title: imageData[index]['text']!,
+                      ),
+                    ),
+                  );
+                },
+                child: Container(
+                  padding: const EdgeInsets.only(left: 5, bottom: 5),
+                  child: Stack(
+                    fit: StackFit.expand,
+                    children: <Widget>[
+                      DecoratedBox(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(4),
+                          image: DecorationImage(
+                            fit: BoxFit.cover,
+                            colorFilter: ColorFilter.mode(
+                              Colors.black.withOpacity(0.3),
+                              BlendMode.darken,
+                            ),
+                            image: AssetImage(
+                              imageData[index]['url']!,
+                            ),
+                          ),
+                        ),
+                      ),
+                      Positioned(
+                        bottom: 8,
+                        left: 8,
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                imageData[index]['text']!,
+                                style: const TextStyle(
+                                  fontWeight: FontWeight.w600,
+                                  fontFamily: "outfit",
+                                  color: Colors.white,
+                                ),
+                              ),
+                              const Row(
+                                children: [
+                                  Icon(
+                                    Icons.remove_red_eye_outlined,
+                                    color: Colors.white,
+                                  ),
+                                  SizedBox(width: 10),
+                                  Text(
+                                    "4.5 k",
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.w300,
+                                      fontFamily: "outfit",
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                  SizedBox(width: 20),
+                                  Text(
+                                    "10 min",
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.w300,
+                                      fontFamily: "outfit",
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              );
+            }),
+          ),
+        ),
+      ],
+    );
   }
+}
 
-  Widget _vlogsContent() {
-    return const Center(child: Text("Vlogs content goes here"));
+class BlogDetailPage extends StatelessWidget {
+  final String imageUrl;
+  final String title;
+
+  const BlogDetailPage(
+      {super.key, required this.imageUrl, required this.title});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(title),
+      ),
+      body: Column(
+        children: [
+          Image.asset(imageUrl),
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Text(
+              'Detailed content about $title goes here.',
+              style: TextStyle(fontSize: 18),
+            ),
+          ),
+        ],
+      ),
+    );
   }
+}
 
-  Widget _postsContent() {
-    return _profilePostsGrid();
+class VlogsContent extends StatelessWidget {
+  const VlogsContent({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final List<Map<String, String>> imageData = [
+      {
+        'url': 'assets/images/img_rectangle172.png',
+        'text': 'Ancient Roman amphitheater, a landmark'
+      },
+      {
+        'url': 'assets/images/img_rectangle169.png',
+        'text': 'World of engineering'
+      },
+      {'url': 'assets/images/img_rectangle168.png', 'text': 'Image 3'},
+      {'url': 'assets/images/img_27745327513096_5.png', 'text': 'Image 4'},
+      {'url': 'assets/images/img_rectangle180.png', 'text': 'Image 5'},
+      {'url': 'assets/images/img_rectangle180.png', 'text': 'Image 6'},
+      {'url': 'assets/images/img_rectangle180.png', 'text': 'Image 7'},
+      {'url': 'assets/images/img_rectangle180.png', 'text': 'Image 8'},
+      {'url': 'assets/images/img_rectangle180.png', 'text': 'Image 9'},
+      {'url': 'assets/images/img_rectangle180.png', 'text': 'Image 10'},
+      {'url': 'assets/images/img_rectangle180.png', 'text': 'Image 11'},
+    ];
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Padding(
+          padding: EdgeInsets.only(left: 8, right: 12, top: 13),
+          child: GridView.builder(
+            shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
+              childAspectRatio: 1.3,
+            ),
+            itemCount: imageData.length,
+            itemBuilder: (context, index) {
+              return InkWell(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => VlogDetailPage(
+                        imageUrl: imageData[index]['url']!,
+                        title: imageData[index]['text']!,
+                      ),
+                    ),
+                  );
+                },
+                child: Container(
+                  padding: const EdgeInsets.only(left: 5, bottom: 5),
+                  child: Stack(
+                    fit: StackFit.expand,
+                    children: <Widget>[
+                      DecoratedBox(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(4),
+                          image: DecorationImage(
+                            fit: BoxFit.cover,
+                            colorFilter: ColorFilter.mode(
+                              Colors.black.withOpacity(0.3),
+                              BlendMode.darken,
+                            ),
+                            image: AssetImage(imageData[index]['url']!),
+                          ),
+                        ),
+                      ),
+                      Positioned(
+                        bottom: 5,
+                        left: 8,
+                        right: 2,
+                        child: Row(
+                          children: [
+                            const Icon(Icons.play_circle, color: Colors.white),
+                            const SizedBox(width: 8),
+                            Expanded(
+                              child: Container(
+                                padding: const EdgeInsets.all(5.0),
+                                child: Text(
+                                  imageData[index]['text']!,
+                                  softWrap: true,
+                                  style: const TextStyle(
+                                    fontWeight: FontWeight.w600,
+                                    fontFamily: "outfit",
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              );
+            },
+          ),
+        ),
+      ],
+    );
   }
+}
 
-  Widget _vibesContent() {
-    return const Center(child: Text("Vibes content goes here"));
+class VlogDetailPage extends StatelessWidget {
+  final String imageUrl;
+  final String title;
+
+  const VlogDetailPage(
+      {super.key, required this.imageUrl, required this.title});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(title),
+      ),
+      body: Center(
+        child: Image.asset(imageUrl),
+      ),
+    );
   }
+}
 
-  Widget _profilePostsGrid() {
-    final List<String> images = [
-      'assets/images/img_rectangle133_121x121.png',
-      'assets/images/img_rectangle134.png',
-      'assets/images/img_rectangle134_121x121.png',
-      'assets/images/img_rectangle136.png',
-      'assets/images/img_rectangle136_121x121.png',
-      'assets/images/img_rectangle137.png',
-      'assets/images/img_rectangle133_121x121.png',
-      'assets/images/img_rectangle134.png',
-      'assets/images/img_rectangle134_121x121.png',
-      'assets/images/img_rectangle136.png',
-      'assets/images/img_rectangle136_121x121.png',
-      'assets/images/img_rectangle137.png',
-      // Add more image paths as needed
+class PostsContent extends StatelessWidget {
+  const PostsContent({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return ProfilePostsGrid();
+  }
+}
+
+class VibesContent extends StatelessWidget {
+  const VibesContent({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final List<Map<String, String>> imageData = [
+      {'url': 'assets/images/img_rectangle155.png', 'views': '20k views'},
+      {'url': 'assets/images/img_rectangle156.png', 'views': '30k views'},
+      {'url': 'assets/images/img_rectangle157.png', 'views': '1M views'},
+      {'url': 'assets/images/img_rectangle158.png', 'views': '200k views'},
+      {'url': 'assets/images/img_rectangle159.png', 'views': '160k views'},
+      {'url': 'assets/images/img_rectangle160.png', 'views': '530k views'},
+      {'url': 'assets/images/img_rectangle161.png', 'views': '350k views'},
+      {'url': 'assets/images/img_rectangle162.png', 'views': '160k views'},
+      {'url': 'assets/images/img_rectangle163.png', 'views': '1.2M views'},
     ];
 
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: GridView.builder(
+        padding: const EdgeInsets.only(left: 7, right: 7, top: 10),
+        shrinkWrap: true,
+        physics: const NeverScrollableScrollPhysics(),
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 3,
+          crossAxisSpacing: 4,
+          mainAxisSpacing: 4,
+          childAspectRatio: 126 / 237,
+        ),
+        itemCount: imageData.length,
+        itemBuilder: (context, index) {
+          final item = imageData[index];
+          return GestureDetector(
+            onTap: () {
+              // Navigate to detail page for the selected item
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => VibesDetailPage(
+                    imageUrl: item['url']!,
+                    views: item['views']!,
+                  ),
+                ),
+              );
+            },
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(4),
+              child: Stack(
+                children: [
+                  Container(
+                    height: 237,
+                    width: 126,
+                    child: Image.asset(
+                      item['url']!,
+                      color: Colors.black.withOpacity(0.3), 
+                      colorBlendMode: BlendMode.darken,
+                      fit: BoxFit.cover,
+                      errorBuilder: (context, error, stackTrace) {
+                        return Container(
+                          color: Colors.grey,
+                          child: const Center(
+                            child: Icon(Icons.error, color: Colors.red),
+                          ),
+                        );
+                      },
+                    ),
+                  ),
+                  Positioned(
+                    bottom: 4,
+                    left: 4,
+                    child: Container(
+                      color: const Color.fromARGB(0, 0, 0, 0),
+                      padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 2),
+                      child: Text(
+                        item['views']!,
+                        style: const TextStyle(
+                          fontSize: 12,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          );
+        },
+      ),
+    );
+  }
+}
+
+class VibesDetailPage extends StatelessWidget {
+  final String imageUrl;
+  final String views;
+
+  const VibesDetailPage({
+    super.key,
+    required this.imageUrl,
+    required this.views,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Vibes Detail'),
+      ),
+      body: Column(
+        children: [
+          Image.asset(imageUrl),
+          Text(views),
+        ],
+      ),
+    );
+  }
+}
+
+class ProfilePostsGrid extends StatelessWidget {
+  final List<String> images = [
+    'assets/images/img_rectangle195.png',
+    'assets/images/img_rectangle195_173x188.png',
+    'assets/images/img_rectangle196.png',
+    'assets/images/img_rectangle197.png',
+    'assets/images/img_rectangle196_173x188.png',
+    'assets/images/img_rectangle198.png',
+    'assets/images/img_rectangle195.png',
+    'assets/images/img_rectangle195_173x188.png',
+    'assets/images/img_rectangle196.png',
+    'assets/images/img_rectangle197.png',
+    'assets/images/img_rectangle196_173x188.png',
+    'assets/images/img_rectangle198.png',
+    // Add more image paths as needed
+  ];
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: GridView.builder(
+        padding: const EdgeInsets.only(left: 7, right: 7, top: 10),
         physics: const NeverScrollableScrollPhysics(),
         shrinkWrap: true,
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
@@ -334,7 +751,7 @@ class _ProfilePageState extends State<ProfilePage> {
         itemBuilder: (context, index) {
           return Container(
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(8),
+              borderRadius: BorderRadius.circular(4),
               image: DecorationImage(
                 image: AssetImage(images[index]),
                 fit: BoxFit.cover,
