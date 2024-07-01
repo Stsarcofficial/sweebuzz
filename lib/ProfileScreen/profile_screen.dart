@@ -2,10 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:sweebuzz/HomeScreen/home_screen.dart';
 import 'package:sweebuzz/ProfileScreen/Editprofile_screen.dart';
 import 'package:sweebuzz/ProfileScreen/glimpse_screen.dart';
-
-void main() {
-  runApp(const MyApp());
-}
+import 'package:sweebuzz/SettingScreens/setting_screen.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -38,18 +35,23 @@ class ProfilePage extends StatefulWidget {
 
 class _ProfilePageState extends State<ProfilePage> {
   int _selectedTabIndex = 2; // Default to "Posts" tab
+  final PageController _pageController = PageController(initialPage: 2);
 
   void _onTabSelected(int index) {
     setState(() {
       _selectedTabIndex = index;
     });
+    _pageController.jumpToPage(index);
   }
 
   void _onMenuItemSelected(String value) {
     // Handle the selected menu item here
     switch (value) {
       case 'settings':
-        // Navigate to Settings page
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => SettingsPage()),
+        );
         break;
       case 'share_profile':
         // Share profile action
@@ -137,15 +139,28 @@ class _ProfilePageState extends State<ProfilePage> {
           ),
         ],
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            _profileHeader(),
-            _profileStats(),
-            _profileTabs(),
-            _profileContent(),
-          ],
-        ),
+      body: Column(
+        children: [
+          _profileHeader(),
+          _profileStats(),
+          _profileTabs(),
+          Expanded(
+            child: PageView(
+              controller: _pageController,
+              onPageChanged: (index) {
+                setState(() {
+                  _selectedTabIndex = index;
+                });
+              },
+              children: const [
+                BlogsContent(),
+                VlogsContent(),
+                PostsContent(),
+                VibesContent(),
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }
@@ -171,7 +186,7 @@ class _ProfilePageState extends State<ProfilePage> {
           style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
         ),
         const Padding(
-          padding: EdgeInsets.symmetric(horizontal: 40, vertical: 10),
+          padding: EdgeInsets.symmetric(horizontal: 50, vertical: 10),
           child: Text(
             "Keep your face always toward the sunshine, and shadows will fall behind you.",
             textAlign: TextAlign.center,
@@ -296,20 +311,20 @@ class _ProfilePageState extends State<ProfilePage> {
     );
   }
 
-  Widget _profileContent() {
-    switch (_selectedTabIndex) {
-      case 0:
-        return const BlogsContent();
-      case 1:
-        return const VlogsContent();
-      case 2:
-        return const PostsContent();
-      case 3:
-        return VibesContent();
-      default:
-        return const PostsContent();
-    }
-  }
+  // Widget _profileContent() {
+  //   switch (_selectedTabIndex) {
+  //     case 0:
+  //       return const BlogsContent();
+  //     case 1:
+  //       return const VlogsContent();
+  //     case 2:
+  //       return const PostsContent();
+  //     case 3:
+  //       return VibesContent();
+  //     default:
+  //       return const PostsContent();
+  //   }
+  // }
 }
 
 class BlogsContent extends StatelessWidget {
@@ -331,8 +346,7 @@ class BlogsContent extends StatelessWidget {
       {'url': 'assets/images/img_rectangle180.png', 'text': 'Image 8'},
     ];
 
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
+    return PageView(  
       children: [
         Padding(
           padding: const EdgeInsets.only(left: 8, right: 12, top: 13),
@@ -340,7 +354,7 @@ class BlogsContent extends StatelessWidget {
             childAspectRatio: 1.3,
             crossAxisCount: 2,
             shrinkWrap: true,
-            physics: const NeverScrollableScrollPhysics(),
+            physics: const ScrollPhysics(),
             children: List.generate(imageData.length, (index) {
               return InkWell(
                 onTap: () {
@@ -489,14 +503,13 @@ class VlogsContent extends StatelessWidget {
       {'url': 'assets/images/img_rectangle180.png', 'text': 'Image 11'},
     ];
 
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
+    return PageView(
       children: [
         Padding(
           padding: EdgeInsets.only(left: 8, right: 12, top: 13),
           child: GridView.builder(
             shrinkWrap: true,
-            physics: const NeverScrollableScrollPhysics(),
+            physics: const ScrollPhysics(),
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2,
               childAspectRatio: 1.3,
@@ -616,77 +629,82 @@ class VibesContent extends StatelessWidget {
       {'url': 'assets/images/img_rectangle163.png', 'views': '1.2M views'},
     ];
 
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: GridView.builder(
-        padding: const EdgeInsets.only(left: 7, right: 7, top: 10),
-        shrinkWrap: true,
-        physics: const NeverScrollableScrollPhysics(),
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 3,
-          crossAxisSpacing: 4,
-          mainAxisSpacing: 4,
-          childAspectRatio: 126 / 237,
-        ),
-        itemCount: imageData.length,
-        itemBuilder: (context, index) {
-          final item = imageData[index];
-          return GestureDetector(
-            onTap: () {
-              // Navigate to detail page for the selected item
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => VibesDetailPage(
-                    imageUrl: item['url']!,
-                    views: item['views']!,
+    return PageView(
+      children: [
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: GridView.builder(
+            padding: const EdgeInsets.only(left: 7, right: 7, top: 10),
+            shrinkWrap: true,
+            physics: const ScrollPhysics(),
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 3,
+              crossAxisSpacing: 4,
+              mainAxisSpacing: 4,
+              childAspectRatio: 126 / 237,
+            ),
+            itemCount: imageData.length,
+            itemBuilder: (context, index) {
+              final item = imageData[index];
+              return GestureDetector(
+                onTap: () {
+                  // Navigate to detail page for the selected item
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => VibesDetailPage(
+                        imageUrl: item['url']!,
+                        views: item['views']!,
+                      ),
+                    ),
+                  );
+                },
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(4),
+                  child: Stack(
+                    children: [
+                      Container(
+                        height: 237,
+                        width: 126,
+                        child: Image.asset(
+                          item['url']!,
+                          color: Colors.black.withOpacity(0.3),
+                          colorBlendMode: BlendMode.darken,
+                          fit: BoxFit.cover,
+                          errorBuilder: (context, error, stackTrace) {
+                            return Container(
+                              color: Colors.grey,
+                              child: const Center(
+                                child: Icon(Icons.error, color: Colors.red),
+                              ),
+                            );
+                          },
+                        ),
+                      ),
+                      Positioned(
+                        bottom: 4,
+                        left: 4,
+                        child: Container(
+                          color: const Color.fromARGB(0, 0, 0, 0),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 4, vertical: 2),
+                          child: Text(
+                            item['views']!,
+                            style: const TextStyle(
+                              fontSize: 12,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               );
             },
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(4),
-              child: Stack(
-                children: [
-                  Container(
-                    height: 237,
-                    width: 126,
-                    child: Image.asset(
-                      item['url']!,
-                      color: Colors.black.withOpacity(0.3), 
-                      colorBlendMode: BlendMode.darken,
-                      fit: BoxFit.cover,
-                      errorBuilder: (context, error, stackTrace) {
-                        return Container(
-                          color: Colors.grey,
-                          child: const Center(
-                            child: Icon(Icons.error, color: Colors.red),
-                          ),
-                        );
-                      },
-                    ),
-                  ),
-                  Positioned(
-                    bottom: 4,
-                    left: 4,
-                    child: Container(
-                      color: const Color.fromARGB(0, 0, 0, 0),
-                      padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 2),
-                      child: Text(
-                        item['views']!,
-                        style: const TextStyle(
-                          fontSize: 12,
-                          color: Colors.white,
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          );
-        },
-      ),
+          ),
+        )
+      ],
     );
   }
 }
@@ -736,30 +754,34 @@ class ProfilePostsGrid extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: GridView.builder(
-        padding: const EdgeInsets.only(left: 7, right: 7, top: 10),
-        physics: const NeverScrollableScrollPhysics(),
-        shrinkWrap: true,
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 3,
-          crossAxisSpacing: 4,
-          mainAxisSpacing: 4,
-        ),
-        itemCount: images.length,
-        itemBuilder: (context, index) {
-          return Container(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(4),
-              image: DecorationImage(
-                image: AssetImage(images[index]),
-                fit: BoxFit.cover,
-              ),
+    return PageView(
+      children: [
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: GridView.builder(
+            padding: const EdgeInsets.only(left: 7, right: 7, top: 10),
+            physics: const ScrollPhysics(),
+            shrinkWrap: true,
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 3,
+              crossAxisSpacing: 4,
+              mainAxisSpacing: 4,
             ),
-          );
-        },
-      ),
+            itemCount: images.length,
+            itemBuilder: (context, index) {
+              return Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(4),
+                  image: DecorationImage(
+                    image: AssetImage(images[index]),
+                    fit: BoxFit.cover,
+                  ),
+                ),
+              );
+            },
+          ),
+        )
+      ],
     );
   }
 }
