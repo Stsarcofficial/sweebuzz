@@ -376,10 +376,14 @@ class _HomeContentState extends State<HomeContent> {
 class TopStories extends StatelessWidget {
   final List<String> stories = [
     "assets/images/img_rectangle148.png",
-    "assets/images/img_rectangle148.png",
-    "assets/images/img_rectangle148.png",
-    "assets/images/img_rectangle148.png",
-    "assets/images/img_rectangle148.png"
+    "assets/images/img_rectangle129_1.png",
+    "assets/images/img_rectangle136.png",
+    "assets/images/img_rectangle139.png",
+    "assets/images/img_rectangle141.png",
+    "assets/images/img_rectangle125.png",
+    "assets/images/img_rectangle134.png",
+    "assets/images/img_rectangle133.png",
+    "assets/images/img_rectangle132_121x121.png"
   ];
   TopStories({super.key});
 
@@ -390,7 +394,7 @@ class TopStories extends StatelessWidget {
       height: 120,
       child: ListView(
         scrollDirection: Axis.horizontal,
-        children: List.generate(5, (index) {
+        children: List.generate(stories.length, (index) {
           return index != 0
               ? Column(
                   mainAxisAlignment: MainAxisAlignment.start,
@@ -399,7 +403,7 @@ class TopStories extends StatelessWidget {
                     Container(
                       margin: const EdgeInsets.symmetric(horizontal: 5),
                       width: 70,
-                      height: 110,
+                      height: 100,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(15),
                         border: Border.all(
@@ -431,7 +435,7 @@ class TopStories extends StatelessWidget {
                       largeSize: 25,
                       alignment: Alignment.bottomCenter,
                       child: Container(
-                        height: 110,
+                        height: 100,
                         margin: const EdgeInsets.symmetric(horizontal: 5),
                         width: 70,
                         decoration: BoxDecoration(
